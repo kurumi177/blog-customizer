@@ -28,6 +28,10 @@ export const ArticleParamsForm = ({ onApply }: ArticleParamsFormProps) => {
 		useState<ArticleStateType>(defaultArticleState);
 	const sidebarRef = useRef<HTMLElement>(null);
 	useEffect(() => {
+		if (!isOpen) {
+			return;
+		}
+
 		const handleClick = (e: MouseEvent) => {
 			if (
 				sidebarRef.current &&
@@ -37,9 +41,7 @@ export const ArticleParamsForm = ({ onApply }: ArticleParamsFormProps) => {
 			}
 		};
 
-		if (isOpen) {
-			document.addEventListener('mousedown', handleClick);
-		}
+		document.addEventListener('mousedown', handleClick);
 
 		return () => {
 			document.removeEventListener('mousedown', handleClick);
